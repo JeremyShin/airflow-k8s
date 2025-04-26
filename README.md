@@ -68,10 +68,16 @@ helm install airflow airflow-stable/airflow --namespace airflow --create-namespa
 
 # 설치 확인 & 접속
 ```shell
-
 # pod 상태 확인
 kubectl get pods -n airflow
+```
 
+```
 # 웹 UI 포트포워딩
 kubectl port-forward svc/airflow-web 8080:8080 -n airflow
+```
+
+### helm 차트 업데이트 반영
+```shell
+helm upgrade --install airflow apache-airflow/airflow --namespace airflow --create-namespace -f values.yaml --debug
 ```
