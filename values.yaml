@@ -1,9 +1,51 @@
-# values.yaml
-executor: KubernetesExecutor       # K8s 위에선 K8sExecutor 추천
+executor: KubernetesExecutor
+fernetKey: "qwerty"
+
+webserver:
+  defaultUser:
+    enabled: true
+    email: "admin@example.com"
+    firstName: "admin"
+    lastName: "user"
+    password: "admin"
+    role: Admin
+
 web:
   port: 8080
-tolerations: []                    # 필요시 설정
-persistence:
-  enabled: true
-  storageClass: standard
-  accessMode: ReadWriteOnce
+
+tolerations: []
+
+dags:
+  # (1) PVC로 DAGs를 Persist 하려면 enabled: true
+  persistence:
+    enabled: true
+    storageClass: standard
+    accessMode: ReadWriteOnce
+
+
+   # (2) Git-Sync 활성화 & Repo 정보
+    gitSync:
+      enabled: true                     # Git-Sync sidecar/init-container 켜기
+      repo: "git@github.com:JeremyShin/airflow-k8s.git"  
+      ref: "main"                       # 브랜치/태그/커밋 해시 지정 :contentReference[oaicite:0]{index=0}
+      rev: "HEAD"                       # 기본 동기화 리비전
+      depth: 4                          # shallow clone depth
+      subPath: ""                       # Repo 내 DAGs 경로 (루트이면 빈 문자열)
+      period: "60s"                     # 동기화 주기 (Go duration 형식) :contentReference[oaicite:1]{index=1}
+      resources:                        # (선택) git-sync 컨테이너 리소스
+        requests:
+          cpu: 100m
+          memory: 128Mi
+        limits:
+          cpu: 200m
+          memory: 256Mi
+      # SSH 키로 인증하려면 아래 두 줄을 추가
+      # sshKeySecret: git-ssh-key-secret
+      # sshKey: /etc/git-secret/ssh
+
+  # 이 외에도 필요하다면 gitSync.uid, gitSync.securityContext 등 추가 설정 가능
+workers:
+  persistence:
+    enabled: true
+    storageClassName: standard
+    accessMode: ReadWriteOnce
