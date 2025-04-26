@@ -1,10 +1,14 @@
-
+# kind, helm 설치
 
 ```shell
 # kind 설치
 brew install kind
+
+# helm 설치
+brew install helm
 ```
 
+# colima 설정
 ```
 colima start --cpu 6 --memory 12
 ```
