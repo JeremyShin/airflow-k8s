@@ -18,6 +18,7 @@ colima start --cpu 6 --memory 12
 
 # kube-ps1 설정
 * oh-my-zsh에서 plugins에 kube-ps1 추가
+```shell
 plugins=(
 git
 ...
@@ -26,30 +27,17 @@ kube-ps1
 
 source $ZSH/oh-my-zsh.sh
 PROMPT= '$(kube_ps1)' $PROMPT
-
-
-# kind 클러스터 생성
-
-# kind-config.yaml 파일 생성
-```yaml
-kind: Cluster
-apiVersion: kind.x-k8s.io/v1alpha4
-
-# 단일 노드 사용
-nodes:
-    - role: control-plane
-
 ```
 
 # kind 클러스터 생성
 
 ```shell
-kind create cluster --name airflow-cluster --config kind-config.yaml
+kind create cluster --name airflow-local --config kind-config.yaml
 ```
 # kind 클러스터 생성 확인
 ```shell
 kind get clusters
-# airflow-cluster
+# airflow-local
 ```
 
 * 컨텍스트 확인
@@ -60,13 +48,13 @@ k config get-contexts
 
 # Helm repo 등록 & 업데이트
 ```shell
-helm repo add airflow-stable https://airflow-helm.github.io/charts
+helm repo add airflow https://airflow.apache.org
 helm repo update
 ```
 
 # airflow 설치
 ```shell
-helm install airflow airflow-stable/airflow --namespace airflow --create-namespace -f values.yaml
+helm install airflow apache-airflow/airflow --namespace airflow --create-namespace -f values.yaml -f values-secret.yaml
 ```
 
 # 설치 확인 & 접속
@@ -88,4 +76,9 @@ helm upgrade --install airflow apache-airflow/airflow --namespace airflow --crea
 ### pod 접속
 ```shell
 k exec -it airflow-scheduler-699495d87-dtx94 --namespace airflow -- /bin/bash
+```
+
+### crash 날 땐 
+```text
+pvc 전체 삭제 후 실행
 ```
