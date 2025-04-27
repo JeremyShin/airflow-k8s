@@ -3,9 +3,9 @@ apiVersion: kind.x-k8s.io/v1alpha4
 
 # 단일 노드 사용
 nodes:
-    - role: control-plane
-      extraMounts:
-        - hostPath: ./dags
-          containerPath: /opt/airflow/dags
-        - hostPath: ./logs
-          containerPath: /opt/airflow/logs
+  - role: control-plane
+    extraMounts:
+      - hostPath: ./dags
+        containerPath: /opt/airflow/dags
+      - hostPath: ./logs
+        containerPath: /opt/airflow/logs
