@@ -1,20 +1,33 @@
+# simple_dag.py
+
 from datetime import datetime
 from airflow import DAG
-from airflow.operators.python_operator import PythonOperator
+from airflow.operators.bash import BashOperator
+
+default_args = {
+    'start_date': datetime(2023, 1, 1),
+}
 
 with DAG(
-    dag_id='sample-dag',
-    schedule_interval='@once',
-    start_date=datetime(2025, 4, 26),
-    catchup=False
+    dag_id='simple_dag',
+    default_args=default_args,
+    schedule_interval='@daily',
+    catchup=False,
 ) as dag:
-    def sample():
-        print('hello wolrd')
 
-    sample_task = PythonOperator(
-        task_id='sample',
-        python_callable=sample
+    task_1 = BashOperator(
+        task_id='print_date',
+        bash_command='date',
     )
 
-    sample_task
+    task_2 = BashOperator(
+        task_id='sleep',
+        bash_command='sleep 5',
+    )
 
+    task_3 = BashOperator(
+        task_id='print_message',
+        bash_command='echo "에어플로우 튜토리얼"',
+    )
+
+    task_1 >> task_2 >> task_3

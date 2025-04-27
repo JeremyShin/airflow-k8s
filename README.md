@@ -4,6 +4,9 @@
 # kind 설치
 brew install kind
 
+# kubectl 설치 확인
+kubectl version
+
 # helm 설치
 brew install helm
 ```
@@ -80,4 +83,9 @@ kubectl port-forward svc/airflow-web 8080:8080 -n airflow
 ### helm 차트 업데이트 반영
 ```shell
 helm upgrade --install airflow apache-airflow/airflow --namespace airflow --create-namespace -f values.yaml --debug
+```
+
+### pod 접속
+```shell
+k exec -it airflow-scheduler-699495d87-dtx94 --namespace airflow -- /bin/bash
 ```
