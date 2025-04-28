@@ -1,1 +1,2 @@
 app-chart/airflow/values-secret.yaml
+dags/__pycache__/*
