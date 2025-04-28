@@ -32,7 +32,7 @@ PROMPT= '$(kube_ps1)' $PROMPT
 # kind 클러스터 생성
 
 ```shell
-kind create cluster --name airflow-local --config kind-config.yaml
+kind create cluster --name airflow-local --config app-chart/kind-config.yaml
 ```
 # kind 클러스터 생성 확인
 ```shell
@@ -54,7 +54,7 @@ helm repo update
 
 # airflow 설치
 ```shell
-helm install airflow apache-airflow/airflow --namespace airflow --create-namespace -f values.yaml -f values-secret.yaml
+helm install airflow apache-airflow/airflow --namespace airflow --create-namespace -f app-chart/airflow/values.yaml -f app-chart/airflow/values-secret.yaml
 ```
 
 # 설치 확인 & 접속
@@ -65,7 +65,7 @@ kubectl get pods -n airflow
 
 ```
 # 웹 UI 포트포워딩
-kubectl port-forward svc/airflow-web 8080:8080 -n airflow
+kubectl port-forward svc/airflow-webserver 8080:8080 -n airflow
 ```
 
 ### helm 차트 업데이트 반영

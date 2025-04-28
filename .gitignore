@@ -1,1 +1,1 @@
-values-secret.yaml
+app-chart/airflow/values-secret.yaml
