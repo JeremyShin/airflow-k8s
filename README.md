@@ -54,7 +54,7 @@ helm repo update
 
 # airflow 설치
 ```shell
-helm install airflow apache-airflow/airflow --namespace airflow --create-namespace -f app-chart/airflow/values.yaml -f app-chart/airflow/values-local.yaml -f app-chart/airflow/values-secret.yaml
+helm install airflow apache-airflow/airflow --namespace airflow --create-namespace -f app-chart/airflow/values.yaml -f app-chart/airflow/values-secret.yaml
 ```
 
 # 설치 확인 & 접속
@@ -70,10 +70,15 @@ kubectl port-forward svc/airflow-webserver 8080:8080 -n airflow
 
 ### helm 차트 업데이트 반영
 ```shell
-helm upgrade airflow apache-airflow/airflow --namespace airflow --create-namespace -f app-chart/airflow/values.yaml -f app-chart/airflow/values-local.yaml -f app-chart/airflow/values-secret.yaml
+helm upgrade --install airflow apache-airflow/airflow --namespace airflow --create-namespace -f values.yaml --debug
 ```
 
 ### pod 접속
 ```shell
 k exec -it airflow-scheduler-699495d87-dtx94 --namespace airflow -- /bin/bash
+```
+
+### crash 날 땐 
+```text
+pvc 전체 삭제 후 실행
 ```
