@@ -44,3 +44,8 @@ triggerer:
   extraVolumeMounts:
     - name: host-dags
       mountPath: /opt/airflow/dags
+
+## 5. airflow-custom 이미지 사용
+defaultAirflowRepository: airflow-local
+defaultAirflowTag: "2.10.5"
+airflowVersion: "2.10.5"

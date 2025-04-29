@@ -44,6 +44,20 @@ kind get clusters
 ```shell
 k config get-contexts
 ```
+# docker image 생성
+```shell
+sudo docker build -t airflow-local:2.10.5 .
+```
+
+# kind에 docker image load
+```shell
+kind load docker-image airflow-local:2.10.5 --name airflow-local
+```
+
+# 확인
+```shell
+docker images
+```
 
 
 # Helm repo 등록 & 업데이트
@@ -81,4 +95,8 @@ k exec -it airflow-scheduler-699495d87-dtx94 --namespace airflow -- /bin/bash
 ### crash 날 땐 
 ```text
 pvc 전체 삭제 후 실행
+```
+### helm upgrade 문제가 생겼다면 rollback 
+```shell
+helm rollback airflow 1 -n airflow
 ```
