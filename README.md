@@ -54,12 +54,6 @@ sudo docker build -t airflow-local:2.10.5 .
 kind load docker-image airflow-local:2.10.5 --name airflow-local
 ```
 
-# 확인
-```shell
-docker images
-```
-
-
 # Helm repo 등록 & 업데이트
 ```shell
 helm repo add airflow https://airflow.apache.org
