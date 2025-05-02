@@ -13,9 +13,9 @@ RUN apt-get update \
 USER airflow
 # RUN python -m pip install --upgrade pip
 # RUN pip install --upgrade setuptools
-# RUN pip install apache-airflow==2.8.4 \
+# RUN pip install apache-airflow==2.10.5 \
 #     --constraint \
-#     "https://raw.githubusercontent.com/apache/airflow/constraints-2.8.4/constraints-3.10.txt"
+#     "https://raw.githubusercontent.com/apache/airflow/constraints-2.10.5/constraints-3.12.txt"
 COPY ./requirements.txt /tmp/requirements.txt
 RUN pip install -r /tmp/requirements.txt
 RUN pip uninstall -y argparse
