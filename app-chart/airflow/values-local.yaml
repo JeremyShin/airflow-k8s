@@ -49,3 +49,26 @@ triggerer:
 defaultAirflowRepository: airflow-local
 defaultAirflowTag: "2.10.5"
 airflowVersion: "2.10.5"
+
+## 6. 프로메테우스 모니터링 추가
+metrics:
+  enabled: true
+  statsd:
+    enabled: true
+    host: "127.0.0.1"
+    port: 9125
+  serviceMonitor:
+    enabled: true
+    namespace: monitoring       # Prometheus가 모니터링하는 네임스페이스
+    interval: 15s
+    labels:
+      release: monitoring       # ServiceMonitor가 Prometheus에 잡히도록
+extraContainers:
+  - name: statsd-exporter
+    image: prom/statsd-exporter:v0.23.0
+    args:
+      - "--statsd.listen-udp=:9125"
+      - "--telemetry.telemetry-path=/metrics"
+    ports:
+      - name: metrics
+        containerPort: 9102
