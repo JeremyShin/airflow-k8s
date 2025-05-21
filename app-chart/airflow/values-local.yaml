@@ -1,5 +1,14 @@
-## 1. 실행 모드
+## 0. 실행 모드
 executor: "KubernetesExecutor"
+
+## 1. 환경 설정
+env: 
+  - name: AIRFLOW__CORE__LOAD_EXAMPLES
+    value: "False"
+  - name: AIRFLOW__CORE__TESET_CONNECTION
+    value: "enabled"
+  - name: AIRFLOW__KUBERNETES__DELETE_WORKER_PODS
+    value: "True"
 
 ## 2. Web 서버에 호스트 볼륨 추가
 web:
