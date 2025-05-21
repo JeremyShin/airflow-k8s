@@ -1,3 +1,6 @@
+# TODO: k8spod, sparkk8s, emr on k8s operator 돌려보기
+# iceberg, s3 table 테스트
+
 # kind, helm 설치
 
 ```shell
