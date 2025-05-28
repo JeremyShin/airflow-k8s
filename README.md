@@ -97,12 +97,12 @@ helm install airflow airflow/airflow \
 # 설치 확인 & 접속
 ```shell
 # pod 상태 확인
-kubectl get pods -n airflow
+kubectl get pods -n airflow-local
 ```
 
 ```
 # 웹 UI 포트포워딩
-kubectl port-forward svc/airflow-webserver 8080:8080 -n airflow
+kubectl port-forward svc/airflow-webserver 8080:8080 -n airflow-local
 ```
 
 ### helm 차트 업데이트 반영
@@ -121,5 +121,5 @@ pvc 전체 삭제 후 실행
 ```
 ### helm upgrade 문제가 생겼다면 rollback 
 ```shell
-helm rollback airflow 1 -n airflow
+helm rollback airflow 1 -n airflow-local
 ```
