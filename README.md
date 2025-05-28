@@ -86,7 +86,7 @@ helm repo update
 
 # airflow 설치
 ```shell
-helm install airflow apache-airflow/airflow \
+helm install airflow airflow/airflow \
     --namespace airflow \
     --create-namespace \
     -f app-chart/airflow/values.yaml \
