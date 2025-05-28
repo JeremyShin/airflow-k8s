@@ -1,6 +1,24 @@
 # TODO: k8spod, sparkk8s, emr on k8s operator 돌려보기
 # iceberg, s3 table 테스트
 
+# docker 설치
+```shell
+brew install docker
+
+# m4 max
+colima start --arch aarch64 --cpu 8 memory 32
+
+# 상태 확인
+docker version
+```
+
+# colima 설치
+```shell
+brew install colima
+
+colima status
+```
+
 # kind, helm 설치
 
 ```shell
@@ -22,6 +40,9 @@ colima start --cpu 6 --memory 12
 # kube-ps1 설정
 * oh-my-zsh에서 plugins에 kube-ps1 추가
 ```shell
+brew install kube-ps1
+
+# ~/.zshrc
 plugins=(
 git
 ...
